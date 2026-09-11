@@ -1,0 +1,1842 @@
+/* =====================================================
+   GENERAL
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #05030b;
+    color: #f4e8c1;
+    font-family: "Cinzel", serif;
+    overflow-x: hidden;
+    cursor: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+/* =====================================================
+   LOADING SCREEN
+===================================================== */
+
+#loader {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+
+    background:
+        radial-gradient(circle, #241044, #05030b 70%);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    transition: 1s ease;
+}
+
+#loader.hide-loader {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loader-symbol {
+    font-size: 70px;
+
+    animation:
+        loaderLightning 1s infinite alternate,
+        loaderRotate 3s infinite linear;
+}
+
+#loader h2 {
+    margin-top: 20px;
+    font-family: "MedievalSharp", cursive;
+    letter-spacing: 3px;
+}
+
+.loading-line {
+    width: 250px;
+    height: 3px;
+    margin-top: 30px;
+
+    background: #d8b45a;
+
+    animation: loading 1.5s infinite;
+}
+
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 75px;
+
+    z-index: 1000;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 7%;
+
+    background: rgba(5, 3, 11, 0.75);
+
+    border-bottom: 1px solid rgba(216, 180, 90, 0.25);
+
+    backdrop-filter: blur(10px);
+}
+
+.logo {
+    color: #e7c66b;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 3px;
+
+    text-shadow:
+        0 0 10px #d8b45a,
+        0 0 20px #d8b45a;
+}
+
+nav {
+    display: flex;
+    gap: 30px;
+}
+
+nav a {
+    color: #e8d9ad;
+    font-size: 13px;
+    letter-spacing: 1px;
+
+    position: relative;
+
+    transition: 0.3s;
+}
+
+nav a::after {
+    content: "";
+
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+
+    width: 0;
+    height: 2px;
+
+    background: #d8b45a;
+
+    box-shadow: 0 0 10px #d8b45a;
+
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #fff0a8;
+    text-shadow: 0 0 10px #d8b45a;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+
+/* =====================================================
+   MAGIC CURSOR
+===================================================== */
+
+.magic-cursor {
+    width: 28px;
+    height: 28px;
+
+    position: fixed;
+
+    pointer-events: none;
+
+    z-index: 999999;
+
+    transform: translate(-50%, -50%);
+
+    border: 2px solid #f5d77b;
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 10px #d8b45a,
+        0 0 20px #d8b45a,
+        inset 0 0 10px #d8b45a;
+
+    transition:
+        width 0.2s,
+        height 0.2s;
+}
+
+.magic-cursor::before {
+    content: "✦";
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -55%);
+
+    color: #fff4ad;
+
+    font-size: 15px;
+
+    text-shadow:
+        0 0 10px #fff,
+        0 0 20px #d8b45a;
+}
+
+.wand-tip {
+    position: absolute;
+
+    width: 4px;
+    height: 45px;
+
+    background: #e5c56c;
+
+    left: 22px;
+    top: 17px;
+
+    transform: rotate(-45deg);
+
+    border-radius: 5px;
+
+    box-shadow:
+        0 0 10px #e5c56c,
+        0 0 20px #d8b45a;
+}
+
+.spark {
+    position: fixed;
+
+    pointer-events: none;
+
+    z-index: 999998;
+
+    color: #ffe99a;
+
+    font-size: 13px;
+
+    animation: sparkFade 0.7s forwards;
+}
+
+.click-magic {
+    position: fixed;
+
+    pointer-events: none;
+
+    z-index: 999998;
+
+    font-size: 17px;
+
+    animation: clickMagic 0.9s forwards;
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero {
+    position: relative;
+
+    min-height: 100vh;
+
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background:
+        radial-gradient(
+            circle at 50% 35%,
+            #32115e 0%,
+            #10071f 45%,
+            #05030b 100%
+        );
+}
+
+
+/* =====================================================
+   MOON
+===================================================== */
+
+.moon {
+    position: absolute;
+
+    width: 180px;
+    height: 180px;
+
+    right: 12%;
+    top: 13%;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #fffbd8,
+            #e8dca8 45%,
+            #bcae78
+        );
+
+    box-shadow:
+        0 0 30px #fff4bd,
+        0 0 70px rgba(255, 240, 170, 0.4),
+        0 0 130px rgba(255, 230, 130, 0.2);
+
+    animation: moonGlow 4s infinite alternate;
+}
+
+
+/* =====================================================
+   STARS
+===================================================== */
+
+.stars {
+    position: absolute;
+    inset: 0;
+
+    background-image:
+        radial-gradient(#fff 1px, transparent 1px),
+        radial-gradient(#d8b45a 1px, transparent 1px);
+
+    background-size:
+        90px 90px,
+        150px 150px;
+
+    opacity: 0.45;
+
+    animation: starsMove 30s linear infinite;
+}
+
+
+/* =====================================================
+   MAGIC PORTAL
+===================================================== */
+
+.magic-portal {
+    position: absolute;
+
+    width: 600px;
+    height: 600px;
+
+    border-radius: 50%;
+
+    border: 2px solid rgba(216, 180, 90, 0.25);
+
+    box-shadow:
+        0 0 30px rgba(216, 180, 90, 0.2),
+        inset 0 0 50px rgba(216, 180, 90, 0.1);
+
+    animation: portalRotate 15s linear infinite;
+}
+
+.magic-portal::before,
+.magic-portal::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 35px;
+
+    border: 1px solid rgba(216, 180, 90, 0.25);
+
+    border-radius: 50%;
+}
+
+.magic-portal::after {
+    inset: 80px;
+}
+
+
+/* =====================================================
+   CASTLE
+===================================================== */
+
+.castle {
+    position: absolute;
+
+    bottom: -20px;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 55%;
+
+    background-image:
+        url("https://live.staticflickr.com/4085/5013698285_071d797c39_o.jpg");
+
+    background-size: cover;
+    background-position: center;
+
+    opacity: 0.55;
+
+    filter:
+        brightness(0.35)
+        contrast(1.3)
+        saturate(0.5);
+
+    mask-image:
+        linear-gradient(
+            to bottom,
+            transparent 0%,
+            black 25%,
+            black 100%
+        );
+
+    -webkit-mask-image:
+        linear-gradient(
+            to bottom,
+            transparent 0%,
+            black 25%,
+            black 100%
+        );
+}
+
+
+/* =====================================================
+   FOG
+===================================================== */
+
+.fog {
+    position: absolute;
+
+    width: 120%;
+    height: 180px;
+
+    left: -10%;
+    bottom: 0;
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(180, 170, 200, 0.16),
+            transparent 70%
+        );
+
+    filter: blur(25px);
+
+    opacity: 0.6;
+}
+
+.fog-one {
+    animation: fogMove 12s ease-in-out infinite alternate;
+}
+
+.fog-two {
+    bottom: 100px;
+    opacity: 0.3;
+
+    animation: fogMove 18s ease-in-out infinite alternate-reverse;
+}
+
+
+/* =====================================================
+   HERO CONTENT
+===================================================== */
+
+.hero-content {
+    position: relative;
+
+    z-index: 20;
+
+    text-align: center;
+
+    margin-top: 50px;
+
+    animation: heroAppear 2s ease;
+}
+
+.welcome {
+    font-size: 13px;
+
+    letter-spacing: 7px;
+
+    color: #d8b45a;
+
+    text-shadow:
+        0 0 10px #d8b45a;
+
+    margin-bottom: 15px;
+}
+
+.hero h1 {
+    font-family: "MedievalSharp", cursive;
+
+    font-size: clamp(75px, 14vw, 180px);
+
+    letter-spacing: 15px;
+
+    color: #ead38a;
+
+    text-shadow:
+        0 0 5px #fff4a8,
+        0 0 20px #d8b45a,
+        0 0 50px rgba(216, 180, 90, 0.7);
+
+    animation: nameGlow 3s infinite alternate;
+}
+
+.hero h1 span {
+    display: inline-block;
+
+    animation: letterFloat 3s ease-in-out infinite;
+}
+
+.hero h1 span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.hero h1 span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+.hero h1 span:nth-child(4) {
+    animation-delay: 0.6s;
+}
+
+.hero h1 span:nth-child(5) {
+    animation-delay: 0.8s;
+}
+
+.hero h1 span:nth-child(6) {
+    animation-delay: 1s;
+}
+
+.hero h1 span:nth-child(7) {
+    animation-delay: 1.2s;
+}
+
+.lightning-line {
+    width: 300px;
+    height: 2px;
+
+    margin: 5px auto 20px;
+
+    background: #d8b45a;
+
+    box-shadow:
+        0 0 10px #d8b45a,
+        0 0 30px #d8b45a;
+
+    animation: linePulse 2s infinite;
+}
+
+.subtitle {
+    font-size: 14px;
+
+    letter-spacing: 5px;
+
+    color: #d7caa3;
+}
+
+.quote {
+    max-width: 600px;
+
+    margin: 30px auto;
+
+    color: #bdb1ce;
+
+    font-family: "MedievalSharp", cursive;
+
+    font-size: 17px;
+
+    line-height: 1.7;
+}
+
+
+/* =====================================================
+   MAGIC BUTTON
+===================================================== */
+
+.magic-button {
+    display: inline-block;
+
+    padding: 14px 30px;
+
+    color: #160d25;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff0a5,
+            #d8b45a
+        );
+
+    border-radius: 30px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    box-shadow:
+        0 0 10px #d8b45a,
+        0 0 30px rgba(216, 180, 90, 0.5);
+
+    transition: 0.4s;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.magic-button:hover {
+    transform: translateY(-5px) scale(1.05);
+
+    box-shadow:
+        0 0 15px #fff0a5,
+        0 0 50px #d8b45a;
+}
+
+.magic-button::before {
+    content: "";
+
+    position: absolute;
+
+    width: 100px;
+    height: 100%;
+
+    left: -120px;
+    top: 0;
+
+    background: rgba(255,255,255,0.5);
+
+    transform: skewX(-20deg);
+
+    transition: 0.6s;
+}
+
+.magic-button:hover::before {
+    left: 150%;
+}
+
+
+/* =====================================================
+   FLOATING CHARACTERS
+===================================================== */
+
+.owl {
+    position: absolute;
+
+    top: 25%;
+    left: 12%;
+
+    font-size: 60px;
+
+    z-index: 15;
+
+    animation:
+        owlFly 8s ease-in-out infinite,
+        owlGlow 2s infinite alternate;
+}
+
+.broom {
+    position: absolute;
+
+    right: -100px;
+    top: 30%;
+
+    font-size: 60px;
+
+    z-index: 15;
+
+    transform: rotate(-15deg);
+
+    animation: broomFly 10s linear infinite;
+}
+
+.wizard-character {
+    position: absolute;
+
+    left: 5%;
+    bottom: 25%;
+
+    font-size: 80px;
+
+    z-index: 16;
+
+    animation: wizardFloat 4s ease-in-out infinite;
+}
+
+.witch-character {
+    position: absolute;
+
+    right: 6%;
+    bottom: 23%;
+
+    font-size: 80px;
+
+    z-index: 16;
+
+    animation: witchFloat 5s ease-in-out infinite;
+}
+
+.spell,
+.witch-spell {
+    position: absolute;
+
+    font-size: 30px;
+
+    animation: spellSpark 1s infinite alternate;
+}
+
+.spell {
+    right: -20px;
+    top: 10px;
+}
+
+.witch-spell {
+    left: -20px;
+    top: 5px;
+}
+
+.wand {
+    position: absolute;
+
+    top: 22%;
+    right: 30%;
+
+    font-size: 45px;
+
+    transform: rotate(-30deg);
+
+    animation: wandFloat 4s ease-in-out infinite;
+}
+
+
+/* =====================================================
+   FLOATING BOOKS
+===================================================== */
+
+.book {
+    position: absolute;
+
+    font-size: 35px;
+
+    z-index: 10;
+
+    opacity: 0.8;
+}
+
+.book1 {
+    left: 25%;
+    top: 25%;
+
+    animation: bookFloat 5s infinite;
+}
+
+.book2 {
+    right: 20%;
+    top: 55%;
+
+    animation: bookFloat 7s infinite reverse;
+}
+
+.book3 {
+    left: 18%;
+    bottom: 15%;
+
+    animation: bookFloat 6s infinite;
+}
+
+
+/* =====================================================
+   PARTICLES
+===================================================== */
+
+.particles {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 5;
+
+    pointer-events: none;
+}
+
+.particles span {
+    position: absolute;
+
+    width: 3px;
+    height: 3px;
+
+    border-radius: 50%;
+
+    background: #f5d77b;
+
+    box-shadow:
+        0 0 8px #f5d77b,
+        0 0 15px #d8b45a;
+
+    animation:
+        particleFloat 5s ease-in-out infinite;
+}
+
+
+/* =====================================================
+   OTHER SECTIONS
+===================================================== */
+
+.page-section {
+    position: relative;
+
+    min-height: 80vh;
+
+    padding: 110px 8%;
+
+    background:
+        linear-gradient(
+            180deg,
+            #08040f,
+            #11071d
+        );
+
+    border-top: 1px solid rgba(216,180,90,0.15);
+
+    overflow: hidden;
+}
+
+.page-section::before {
+    content: "✦";
+
+    position: absolute;
+
+    top: 50px;
+    left: 5%;
+
+    font-size: 100px;
+
+    color: rgba(216,180,90,0.04);
+}
+
+.section-title {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 20px;
+
+    margin-bottom: 50px;
+}
+
+.section-title h2 {
+    font-family: "MedievalSharp", cursive;
+
+    font-size: 42px;
+
+    color: #e5c56c;
+
+    text-shadow:
+        0 0 10px #d8b45a;
+}
+
+.section-title span {
+    color: #d8b45a;
+
+    font-size: 25px;
+}
+
+
+/* =====================================================
+   ABOUT
+===================================================== */
+
+.about-card {
+    max-width: 900px;
+
+    margin: auto;
+
+    padding: 50px;
+
+    display: flex;
+
+    gap: 50px;
+
+    align-items: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(48,20,75,0.7),
+            rgba(12,7,22,0.8)
+        );
+
+    border: 1px solid rgba(216,180,90,0.3);
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 0 40px rgba(216,180,90,0.08);
+
+    transition: 0.5s;
+}
+
+.about-card:hover {
+    transform: translateY(-8px);
+
+    box-shadow:
+        0 0 50px rgba(216,180,90,0.2);
+}
+
+.about-symbol {
+    min-width: 180px;
+
+    height: 180px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #3a1958,
+            #10071d
+        );
+
+    border: 2px solid #d8b45a;
+
+    font-size: 80px;
+
+    box-shadow:
+        0 0 30px rgba(216,180,90,0.3);
+}
+
+.about-text h3 {
+    font-size: 28px;
+
+    color: #e6cb78;
+
+    margin-bottom: 20px;
+}
+
+.about-text p {
+    color: #bfb3cc;
+
+    line-height: 1.8;
+
+    margin-bottom: 15px;
+}
+
+.magic-quote {
+    color: #e5c56c !important;
+
+    font-family: "MedievalSharp", cursive;
+
+    font-size: 18px;
+}
+
+
+/* =====================================================
+   SKILLS
+===================================================== */
+
+.skills-container {
+    max-width: 1100px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 25px;
+}
+
+.skill-card {
+    padding: 40px 30px;
+
+    text-align: center;
+
+    background:
+        rgba(31,14,47,0.8);
+
+    border: 1px solid rgba(216,180,90,0.25);
+
+    border-radius: 15px;
+
+    transition: 0.5s;
+}
+
+.skill-card:hover {
+    transform:
+        translateY(-12px)
+        rotateX(5deg);
+
+    border-color: #d8b45a;
+
+    box-shadow:
+        0 0 35px rgba(216,180,90,0.2);
+}
+
+.skill-icon {
+    font-size: 60px;
+
+    margin-bottom: 20px;
+
+    animation:
+        iconFloat 3s ease-in-out infinite;
+}
+
+.skill-card h3 {
+    color: #e5c56c;
+
+    margin-bottom: 15px;
+
+    font-size: 23px;
+}
+
+.skill-card p {
+    color: #aaa0ba;
+
+    line-height: 1.7;
+}
+
+.magic-bar {
+    height: 5px;
+
+    margin-top: 25px;
+
+    background: #241631;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+}
+
+.magic-bar span {
+    display: block;
+
+    width: 90%;
+    height: 100%;
+
+    background: #d8b45a;
+
+    box-shadow:
+        0 0 15px #d8b45a;
+
+    animation: barGlow 2s infinite alternate;
+}
+
+.music-bar span {
+    width: 80%;
+}
+
+.creativity-bar span {
+    width: 95%;
+}
+
+
+/* =====================================================
+   ART
+===================================================== */
+
+.section-description {
+    text-align: center;
+
+    color: #aaa0ba;
+
+    margin-bottom: 40px;
+}
+
+.art-gallery {
+    max-width: 1100px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 25px;
+}
+
+.art-card {
+    padding: 15px;
+
+    background: #160b23;
+
+    border: 1px solid rgba(216,180,90,0.25);
+
+    border-radius: 15px;
+
+    text-align: center;
+
+    transition: 0.5s;
+}
+
+.art-card:hover {
+    transform: translateY(-10px) rotate(-2deg);
+
+    border-color: #d8b45a;
+
+    box-shadow:
+        0 0 30px rgba(216,180,90,0.25);
+}
+
+.art-placeholder {
+    height: 220px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    font-size: 80px;
+
+    background:
+        radial-gradient(
+            circle,
+            #351454,
+            #09040e
+        );
+
+    border-radius: 10px;
+
+    margin-bottom: 20px;
+}
+
+.art-card h3 {
+    color: #e5c56c;
+
+    margin-bottom: 10px;
+}
+
+.art-card p {
+    color: #aaa0ba;
+
+    padding-bottom: 15px;
+}
+
+
+/* =====================================================
+   MUSIC
+===================================================== */
+
+.music-box {
+    max-width: 700px;
+
+    margin: auto;
+
+    padding: 60px;
+
+    text-align: center;
+
+    position: relative;
+
+    background:
+        radial-gradient(
+            circle,
+            #32124c,
+            #0c0613
+        );
+
+    border: 1px solid rgba(216,180,90,0.3);
+
+    border-radius: 25px;
+
+    overflow: hidden;
+}
+
+.record {
+    width: 130px;
+    height: 130px;
+
+    margin: auto;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    font-size: 50px;
+
+    border-radius: 50%;
+
+    background:
+        repeating-radial-gradient(
+            circle,
+            #100813 0px,
+            #100813 5px,
+            #281334 6px,
+            #281334 9px
+        );
+
+    border: 3px solid #d8b45a;
+
+    animation: recordSpin 5s linear infinite;
+
+    box-shadow:
+        0 0 30px rgba(216,180,90,0.3);
+}
+
+.music-box h3 {
+    margin-top: 30px;
+
+    color: #e5c56c;
+
+    font-size: 25px;
+}
+
+.music-box p {
+    margin-top: 15px;
+
+    color: #aaa0ba;
+}
+
+.music-note {
+    position: absolute;
+
+    color: #d8b45a;
+
+    font-size: 40px;
+
+    animation: noteFloat 4s infinite;
+}
+
+.note1 {
+    left: 15%;
+    top: 25%;
+}
+
+.note2 {
+    right: 15%;
+    top: 30%;
+
+    animation-delay: 1s;
+}
+
+.note3 {
+    left: 25%;
+    bottom: 15%;
+
+    animation-delay: 2s;
+}
+
+.equalizer {
+    margin-top: 35px;
+
+    height: 50px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+.equalizer span {
+    width: 7px;
+
+    height: 20px;
+
+    background: #d8b45a;
+
+    box-shadow:
+        0 0 10px #d8b45a;
+
+    animation: equalizer 1s ease-in-out infinite alternate;
+}
+
+.equalizer span:nth-child(2) {
+    animation-delay: .2s;
+}
+
+.equalizer span:nth-child(3) {
+    animation-delay: .4s;
+}
+
+.equalizer span:nth-child(4) {
+    animation-delay: .6s;
+}
+
+.equalizer span:nth-child(5) {
+    animation-delay: .8s;
+}
+
+.equalizer span:nth-child(6) {
+    animation-delay: 1s;
+}
+
+
+/* =====================================================
+   CONTACT
+===================================================== */
+
+.contact-section {
+    text-align: center;
+}
+
+.contact-card {
+    max-width: 650px;
+
+    margin: auto;
+
+    padding: 50px;
+
+    background:
+        rgba(28,12,43,0.8);
+
+    border: 1px solid rgba(216,180,90,0.3);
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 0 40px rgba(216,180,90,0.1);
+}
+
+.owl-large {
+    font-size: 90px;
+
+    animation: owlGlow 2s infinite alternate;
+}
+
+.contact-card h3 {
+    margin: 20px 0;
+
+    color: #e5c56c;
+
+    font-size: 25px;
+}
+
+.contact-card p {
+    color: #aaa0ba;
+
+    margin-bottom: 30px;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer {
+    padding: 40px;
+
+    text-align: center;
+
+    background: #040208;
+
+    border-top: 1px solid rgba(216,180,90,0.2);
+
+    color: #d8b45a;
+}
+
+.footer-small {
+    margin-top: 10px;
+
+    color: #6f657c;
+
+    font-size: 12px;
+}
+
+
+/* =====================================================
+   ANIMATIONS
+===================================================== */
+
+@keyframes loaderLightning {
+
+    from {
+        transform: scale(1);
+        text-shadow: 0 0 10px #d8b45a;
+    }
+
+    to {
+        transform: scale(1.2);
+        text-shadow:
+            0 0 20px #fff,
+            0 0 50px #d8b45a;
+    }
+}
+
+@keyframes loaderRotate {
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes loading {
+
+    0% {
+        transform: scaleX(0);
+    }
+
+    100% {
+        transform: scaleX(1);
+    }
+}
+
+@keyframes moonGlow {
+
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.08);
+    }
+}
+
+@keyframes starsMove {
+
+    from {
+        background-position: 0 0, 0 0;
+    }
+
+    to {
+        background-position: 500px 300px, -300px 200px;
+    }
+}
+
+@keyframes portalRotate {
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes fogMove {
+
+    from {
+        transform: translateX(-5%);
+    }
+
+    to {
+        transform: translateX(5%);
+    }
+}
+
+@keyframes heroAppear {
+
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes nameGlow {
+
+    from {
+        text-shadow:
+            0 0 10px #d8b45a,
+            0 0 25px #d8b45a;
+    }
+
+    to {
+        text-shadow:
+            0 0 15px #fff,
+            0 0 40px #d8b45a,
+            0 0 80px #d8b45a;
+    }
+}
+
+@keyframes letterFloat {
+
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-12px);
+    }
+}
+
+@keyframes linePulse {
+
+    50% {
+        box-shadow:
+            0 0 25px #fff,
+            0 0 50px #d8b45a;
+    }
+}
+
+@keyframes owlFly {
+
+    0% {
+        transform: translate(0, 0) rotate(-5deg);
+    }
+
+    25% {
+        transform: translate(120px, -80px) rotate(10deg);
+    }
+
+    50% {
+        transform: translate(230px, 20px) rotate(-5deg);
+    }
+
+    75% {
+        transform: translate(100px, 100px) rotate(8deg);
+    }
+
+    100% {
+        transform: translate(0, 0) rotate(-5deg);
+    }
+}
+
+@keyframes broomFly {
+
+    0% {
+        right: -100px;
+        transform: rotate(-15deg);
+    }
+
+    100% {
+        right: 110%;
+        transform: rotate(-15deg);
+    }
+}
+
+@keyframes wizardFloat {
+
+    0%,100% {
+        transform: translateY(0) rotate(-2deg);
+    }
+
+    50% {
+        transform: translateY(-30px) rotate(3deg);
+    }
+}
+
+@keyframes witchFloat {
+
+    0%,100% {
+        transform: translateY(0) rotate(2deg);
+    }
+
+    50% {
+        transform: translateY(-40px) rotate(-3deg);
+    }
+}
+
+@keyframes spellSpark {
+
+    from {
+        transform: scale(0.7) rotate(0);
+        opacity: 0.4;
+    }
+
+    to {
+        transform: scale(1.3) rotate(30deg);
+        opacity: 1;
+    }
+}
+
+@keyframes wandFloat {
+
+    0%,100% {
+        transform: translateY(0) rotate(-30deg);
+    }
+
+    50% {
+        transform: translateY(-30px) rotate(-10deg);
+    }
+}
+
+@keyframes bookFloat {
+
+    0%,100% {
+        transform: translateY(0) rotate(-5deg);
+    }
+
+    50% {
+        transform: translateY(-30px) rotate(10deg);
+    }
+}
+
+@keyframes particleFloat {
+
+    0% {
+        transform:
+            translateY(0)
+            scale(0.5);
+
+        opacity: 0;
+    }
+
+    30% {
+        opacity: 1;
+    }
+
+    100% {
+        transform:
+            translateY(-100px)
+            scale(1.3);
+
+        opacity: 0;
+    }
+}
+
+@keyframes sparkFade {
+
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform:
+            translateY(-25px)
+            scale(0);
+    }
+}
+
+@keyframes clickMagic {
+
+    0% {
+        opacity: 1;
+        transform:
+            translate(0,0)
+            scale(0.5)
+            rotate(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform:
+            translate(var(--x),var(--y))
+            scale(1.5)
+            rotate(180deg);
+    }
+}
+
+@keyframes iconFloat {
+
+    0%,100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes barGlow {
+
+    from {
+        box-shadow: 0 0 5px #d8b45a;
+    }
+
+    to {
+        box-shadow:
+            0 0 20px #d8b45a,
+            0 0 30px #d8b45a;
+    }
+}
+
+@keyframes recordSpin {
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes noteFloat {
+
+    0%,100% {
+        transform: translateY(0) rotate(0);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: translateY(-40px) rotate(15deg);
+        opacity: 1;
+    }
+}
+
+@keyframes equalizer {
+
+    from {
+        height: 10px;
+    }
+
+    to {
+        height: 50px;
+    }
+}
+
+@keyframes owlGlow {
+
+    from {
+        filter: drop-shadow(0 0 3px #d8b45a);
+    }
+
+    to {
+        filter:
+            drop-shadow(0 0 15px #d8b45a)
+            drop-shadow(0 0 25px #fff);
+    }
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 900px) {
+
+    nav {
+        gap: 12px;
+    }
+
+    nav a {
+        font-size: 10px;
+    }
+
+    .skills-container,
+    .art-gallery {
+        grid-template-columns: 1fr;
+    }
+
+    .about-card {
+        flex-direction: column;
+
+        text-align: center;
+    }
+
+    .wizard-character,
+    .witch-character {
+        font-size: 55px;
+    }
+
+    .owl {
+        font-size: 45px;
+    }
+
+    .broom {
+        font-size: 45px;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    body {
+        cursor: auto;
+    }
+
+    .magic-cursor {
+        display: none;
+    }
+
+    .navbar {
+        height: auto;
+
+        padding: 15px;
+
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+    nav {
+        flex-wrap: wrap;
+
+        justify-content: center;
+    }
+
+    .hero h1 {
+        font-size: 65px;
+
+        letter-spacing: 5px;
+    }
+
+    .welcome {
+        font-size: 9px;
+
+        letter-spacing: 3px;
+    }
+
+    .subtitle {
+        font-size: 10px;
+
+        letter-spacing: 2px;
+    }
+
+    .quote {
+        padding: 0 25px;
+
+        font-size: 14px;
+    }
+
+    .magic-portal {
+        width: 350px;
+        height: 350px;
+    }
+
+    .moon {
+        width: 100px;
+        height: 100px;
+    }
+
+    .wizard-character {
+        left: 2%;
+        bottom: 12%;
+
+        font-size: 40px;
+    }
+
+    .witch-character {
+        right: 2%;
+        bottom: 12%;
+
+        font-size: 40px;
+    }
+
+    .owl {
+        left: 5%;
+        top: 18%;
+
+        font-size: 35px;
+    }
+
+    .broom {
+        font-size: 35px;
+    }
+
+    .section-title h2 {
+        font-size: 30px;
+    }
+
+    .page-section {
+        padding: 90px 6%;
+    }
+
+}
